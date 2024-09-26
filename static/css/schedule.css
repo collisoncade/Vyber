@@ -1,0 +1,289 @@
+/* * {
+    outline: 1px solid red;
+} */
+
+:root {
+    --prim-col: #00ffff;
+    --dull-col: #009aa2;
+    --sec-col: #202020;
+    --base-col: #181818;
+    --alt-col: white;
+    --gold-col: #eec05e;
+    --font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: var(--sec-col); 
+    background-image: url(); 
+    background-size: cover; 
+    background-position: top; 
+    background-repeat: no-repeat; 
+    font-family: var(--font);
+    color: var(--alt-col); 
+}
+
+.header {
+    background: var(--base-col);
+    border-bottom: 1px solid var(--prim-col);
+    display: flex;
+    padding: 10px;
+    margin: 0;
+}
+
+.header .left {
+    display: flex;
+    align-items: center;
+    width: 25%;
+}
+
+.left img {
+    display: flex;
+}
+
+.logo {
+    padding-left: 17px;
+    font-size: 28px;
+    font-weight: 900;
+    font-family: var(--font);
+    display: flex;
+    align-items: start;
+    color: var(--prim-col);
+    font-size: 32px;
+    font-weight: 900;
+    width: max-content;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu img {
+    outline: 5px solid var(--base-col);
+    width: 30px;
+    background-color: var(--prim-col);
+    border-radius: 10%;
+}
+
+.menu img:hover {
+    outline: 2px double var(--alt-col);
+    animation: rotate 0.3s ease-in-out;
+    box-shadow: 0 0 40px var(--prim-col);
+    transform-origin: center;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(180deg); }
+}
+
+.menu-container button:hover {
+    cursor: pointer;
+    background-color: var(--base-col);
+    box-shadow: 0 0 60px var(--prim-col);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    list-style: none;
+    background: var(--prim-col);
+    margin: auto;
+    padding: 6px 20px;
+    font-weight: 600;
+}
+
+.dropdown-menu li a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: var(--base-col);
+}
+
+.visible {
+    display: flex;
+    animation: expand 150ms ease-in-out;
+    transform-origin: top;
+}
+
+@keyframes expand {
+    0% {transform: scaleY(0);}
+    100% {transform: scaleY(1);}
+}
+
+.header .mid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+}
+
+.header-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+}
+
+.header .mid a {
+    margin-right: 20px;
+    padding: 10px;
+    text-decoration: none;
+    color: var(--alt-col);
+    transition: color 0.3s;
+}
+
+.header-menu div:hover {
+    color: var(--main-col);
+}
+
+@media (max-width: 600px) {.header .mid a {display: none;}}
+
+.header .right {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 16px;
+    width: 25%;
+}
+
+.header .right div {
+    color: var(--alt-col);
+    font-size: xx-large;
+    font-weight: 600;
+    margin: 0px 15px;
+}
+
+.header .right div:hover {
+    cursor: pointer;
+}
+
+.coords {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    gap: 40px;
+}
+
+.profile {
+    background: var(--prim-col);
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    margin-right: 0px;
+}
+
+.menu-dropdown-container {
+    position: relative;
+    margin: 0;
+}
+
+.main {
+    display: block;
+    padding-top: 40px;
+}
+
+.stats-container {
+    display: flex;
+    align-items: center;
+    margin-left: 15%;
+    padding: 15px;
+    width: 70%;
+    height: 35px;
+    background: var(--prim-col);
+    color: var(--base-col);
+}
+
+.stats {
+    display: inline;
+    padding: 0px 50px;
+    width: 40%;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.season-dropdown-container, .week-dropdown-container {
+    position: relative;
+    height: 35px;
+    width: 30%;
+}
+
+.season-select, .week-select {
+    display: inline;
+    width: 100%;
+    height: 100%;
+    color: var(--alt-col);
+    background-color: var(--sec-col);
+    border: none;
+}
+
+.stats-container button:hover {
+    cursor: pointer;
+    background-color: var(--gold-col);
+}
+
+.season-dropdown, .week-dropdown {
+    display: none;
+    position: absolute;
+    margin-top: 40px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    margin-top: 0;
+    position: absolute;
+    list-style: none;
+}
+
+.season-dropdown button, .week-dropdown button {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 0%;
+    background-color: gray;
+    color: var(--alt-col);
+    border-color: var(--alt-col);
+}
+
+.season-dropdown button:hover, .week-dropdown button:hover {
+    background-color: var(--base-col);
+    color: var(--alt-col);
+}
+
+.visible {
+    display: block;
+    animation: expand 150ms ease-in-out;
+    transform-origin: top;
+}
+
+@keyframes expand {
+    0% {transform: scaleY(0);}
+    100% {transform: scaleY(1);}
+}
+
+.time-window-container {
+    display: flex;
+    align-items: center;
+    margin-left: 15%;
+    padding: 15px;
+    width: 70%;
+    height: 10px;
+    background: var(--dull-col);
+    color: var(--alt-col);
+}
+
+.time-window-container div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}

@@ -1,0 +1,128 @@
+/* * {
+    outline: 2px solid red;
+} */
+
+:root {
+    --prim-col: #00ffff;
+    --sec-col: #202020;
+    --alt-col: #009aa2;
+    --base-col: #181818;
+    --off-col: white;
+    --font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--sec-col);
+}
+
+.main {
+    display: block;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 5%;
+    box-shadow: 0 0 10px #00ffff;
+    background-color: var(--base-col);
+    width: 400px;
+    padding-bottom: 30px;
+}
+
+.main div {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    padding-top: 30px;
+    color: var(--prim-col);
+    font-size: xx-large;
+    font-family: var(--font);
+    font-weight: 900;
+}
+
+.pad {
+    padding-top: 50px;
+    color: white;
+    font-family: var(--font);
+}
+
+form {
+    display: grid;
+    justify-items: center;
+}
+
+.email-existence, .username-existence {
+    display: none;
+    color: red;
+    font: var(--font);
+}
+
+input[type="text"], input[type="password"], input[type="submit"] {
+    width: 60%;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--base-col);
+    color: white;
+    font-family: var(--font);
+    outline: none;
+}
+
+input[type="submit"] {
+    width: 30%;
+    transition: transform 0.05s ease-in-out;
+    padding: 7px 5px;
+    background-color: var(--alt-col);
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    transform: scale(1.1);
+    background-color: var(--prim-col);
+    color: var(--base-col);
+    font-weight: 900;
+}
+
+input:hover {
+    box-shadow: 0 0 10px var(--prim-col);
+}
+
+input div {
+    position: absolute;
+}
+
+.or-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+.line {
+    position: absolute;
+    width: 220px;
+    height: 1px;
+    background: gray;
+}
+
+.or {
+    position: absolute;
+    width: 30px;
+    background: var(--base-col);
+    color: gray;
+    font-family: var(--font);
+    font-size: small;
+}
+
+.login a {
+    margin-top: 25px;
+    font-family: var(--font);
+    text-decoration: none;
+    color: var(--alt-col);
+}
+
+.login a:hover {
+    color: var(--prim-col);
+}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Vyber - {{ user.username }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="header">
+        <div class="left">
+            <div class="menu-container">
+                <div class="menu">
+                    <img class="menu-bars" src="{{ url_for('static', filename='images/menu-bars.png') }}" alt="menu-bars">
+                </div>
+            </div>
+            <div class="logo">Vyber</div>
+        </div>
+        <div class="mid">
+            <a href="/make-picks">Make Picks</a>
+            <a href="/league">League</a>
+            <a href="/schedule">Schedule</a>
+            <a href="/profile">Profile</a>
+        </div>
+        <div class="right">
+            <div class="username">{{ user.username }}</div>
+            <div class="profile"></div>
+        </div>
+    </div>
+    <div class="menu-dropdown-container">
+        <ul class="dropdown-menu">
+            <li><a href="/make-picks">Make Picks</a></li>
+            <li><a href="/league">League</a></li>
+            <li><a href="/schedule">Schedule</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="stats-container">
+            <div class="stats">Stats</div>
+            <div class="season-dropdown-container">
+                <button class="season-select">Season &#9662;</button>
+                <ul class="season-dropdown">
+                    <li><button id="sn-sl-1">Season 2023-24</button></li>
+                    <li><button id="sn-ls-2">Season 2024-25</button></li>
+                </ul>
+            </div>
+            <div class="week-dropdown-container">
+                <button class="week-select">Week &#9662;</button>
+                <ul class="week-dropdown">
+                    {% for week in range(1, 19) %}
+                        <li><button id="wk-sl-{{ week }}">Week {{ week }}</button></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="time-window-container">
+            <div class="season-display">Season 2023-24</div>
+            <div class="week-display">Week 1-18</div>
+        </div>
+        <div class="content">
+            <p>Coming soon...</p>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='scripts/profile.js') }}"></script>
+{% endblock %}

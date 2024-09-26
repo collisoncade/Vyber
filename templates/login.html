@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Vyber - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="logo">Vyber</div>
+        <div class="pad">Login</div>
+        <form id="login-form" method="POST" action="/login">
+            <input type="text" id="username" name="username" placeholder="Username">
+            <div class="username-existence"></div>
+            <input type="password" id="password" name="password" placeholder="Password">
+            <input type="submit" id="login" value="Login">
+        </form>
+        <div class="or-container">
+            <div class="line"></div>
+            <div class="or">or</div>
+        </div>
+        <div class="create-account"><a onclick="navigateToCreateAccountPage()">Create Account</a></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts/login.js') }}"></script>
+{% endblock %}

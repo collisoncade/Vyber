@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Vyber - Make Picks</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/make-picks.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% set data = data %}
+    {% set user_data = data['user_data'] %}
+    {% set username = user_data['username'] %}
+    {% set week_wins = user_data['week_wins'] %}
+    {% set week_losses = user_data['week_losses'] %}
+    {% set season_wins = user_data['season_wins'] %}
+    {% set season_losses = user_data['season_losses'] %}
+    {% set season_rank = user_data['season_rank'] %}
+    {% set week_rank = user_data['week_rank'] %}
+    {% set games_data = data['games_data'] %}
+    <div class="header">
+        <div class="left">
+            <div class="menu-container">
+                <div class="menu">
+                    <img class="menu-bars" src="{{ url_for('static', filename='images/menu-bars.png') }}" alt="menu-bars" />
+                </div>
+            </div>
+            <div class="logo">Vyber</div>
+        </div>
+        <div class="mid">
+            <a href="/make-picks">Make Picks</a>
+            <a href="/league">League</a>
+            <a href="/schedule">Schedule</a>
+            <a href="/profile">Profile</a>
+        </div>
+        <div class="right">
+            <div class="username">{{ user_data['username'] }}</div>
+            <div class="profile">
+                <div class="profile-dropdown">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu-dropdown-container">
+        <ul class="dropdown-menu">
+            <li><a href="/make-picks">Make Picks</a></li>
+            <li><a href="/league">League</a></li>
+            <li><a href="/schedule">Schedule</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a class="logout" onclick="logout()">Logout</a></li>
+        </ul>
+    <div class="main">
+        <div class="content-header">
+            <div class="content-subheader-1">
+                <div class="make-picks">Make Picks</div>
+                <div class="user-week-stats">
+                    <div class="text-week">Week: </div>
+                    <div class="record-container">
+                        <div class="week-wins">{{ week_wins }}</div>
+                        <div class="-">-</div>
+                        <div class="week-losses">{{ week_losses }}</div>
+                    </div>
+                    <div class="rank">Week Rank: {{ week_rank }}</div>
+                </div>
+                <div class="user-season-stats">
+                    <div class="text-season">Season: </div>
+                    <div class="record-container">
+                        <div class="season-wins">{{ season_wins }}</div>
+                        <div class="-">-</div>
+                        <div class="season-losses">{{ season_losses }}</div>
+                    </div>
+                    <div class="rank">Season Rank: {{ season_rank }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="week-display">Week {{ data['week'] }}</div>
+    </div>
+    <div class="content-container">
+        {% for game_id, game_data in games_data.items() %}
+            {% set game_info = game_data[0] %}
+            {% set day = game_info[1] %}
+            {% set month = game_info[3] %}
+            {% set month_day = game_info[4] %}
+            {% set hour = game_info[5] %}
+            {% set minute = game_info[6] %}
+            {% set away_team = game_info[7] %}
+            {% set home_team = game_info[8] %}
+            {% set pick = game_data[1] %}
+            {% set pick_window_open = game_data[2] %}
+            {% set result = game_data[3] %}
+
+            {% if hour == 0 %}
+                {% set hour = 12 %}
+                {% set am_pm = 'AM' %}
+            {% elif hour > 12 %}
+                {% set hour = hour - 12 %}
+                {% set am_pm = 'PM' %}
+            {% else %}
+                {% set am_pm = 'AM' %}
+            {% endif %}
+
+            {% if minute < 10 %}
+                {% set minute = '0' + minute|string %}
+            {% else %}
+                {% set minute = minute|string %}
+            {% endif %}
+            
+            <div id="game{{ game_id }}" class="game">
+                <div class="matchup-display">
+                    <div class="event">
+                        {% if pick_window_open %}
+                            <div class="game-date">{{ day }}, {{ month }}/{{ month_day }}</div>
+                            <div class="game-time">{{ hour }}:{{ minute }} {{ am_pm }}</div>
+                        {% else %}
+                            <!-- TODO -->
+                        {% endif %}
+                    </div>
+                    <div class="teams">
+                        <div>
+                            <img class="away-team" src="{{ url_for('static', filename='images/logos/' + away_team + '.png') }}" alt="Away team logo" />
+                        </div>
+                        <p>@</p>
+                        <div>
+                            <img class="home-team" src="{{ url_for('static', filename='images/logos/' + home_team + '.png') }}" alt="Home team logo" />
+                        </div>
+                    </div>
+                </div>
+                <div class="game-divider"></div>
+                <div class="selection-container">
+                    {% set away_select_button = "" %}
+                    {% set home_select_button = "" %}
+                    {% set away_select_button = "select-button" %}
+                    {% set home_select_button = "select-button" %}
+                    {% set away_team_picked = "" %}
+                    {% set home_team_picked = "" %}
+                    {% if pick == away_team %}
+                        {% set away_team_picked = "p-away-team-picked" %}
+                    {% elif pick == home_team %}
+                        {% set home_team_picked = "p-home-team-picked" %}
+                    {% endif %}
+                    {% if pick_window_open %}
+                        <div class="away-div">
+                            <div id="away-team-{{ game_id }}"
+    
+                                 class="{{ away_select_button }} {{ away_team_picked }} {{ away_team_correct }} {{ away_team_incorrect }} option"
+                                 data-game-id="{{ game_id }}"
+                                 data-team="away-team"
+                                 onclick="makePick('{{ game_id }}', '{{ away_team }}')">
+                                <img src="{{ url_for('static', filename='images/logos/' + away_team + '.png') }}" alt="Away team logo" />
+                            </div>
+                        </div>
+                        <div class="pick-divider"></div>
+                        <div class="home-div">
+                            <div id="home-team-{{ game_id }}"
+    
+                                 class="{{ home_select_button}} {{ home_team_picked }} {{ home_team_correct}} {{ home_team_incorrect }} option"
+                                 data-game-id="{{ game_id }}"
+                                 data-team="home-team"
+                                 onclick="makePick('{{ game_id }}', '{{ home_team }}')">
+                                <img src="{{ url_for('static', filename='images/logos/' + home_team + '.png') }}" alt="Home team logo" />
+                            </div>
+                        </div>
+                    {% else %}
+                        {% if pick == result %}
+                            {% set away_team_correct = "" %}
+                            {% set home_team_correct = "" %}
+                            {% if pick == away_team %}
+                                {% set away_team_correct = "correct" %}
+                            {% elif pick == home_team %}
+                                {% set home_team_correct = "correct" %}
+                            {% endif %}
+                        {% elif pick != result %}
+                            {% set away_team_incorrect = "" %}
+                            {% set home_team_incorrect = "" %}
+                            {% if result == away_team %}
+                                {% set home_team_incorrect = "incorrect" %}
+                            {% elif result == home_team %}
+                                {% set away_team_incorrect = "incorrect" %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if result == "TIE" %}
+                            {% set away_team_incorrect = "incorrect" %}
+                            {% set home_team_incorrect = "incorrect" %}
+                        {% endif %}
+                        <div class="away-div">
+                            <div id="away-team-{{ game_id }}"
+    
+                                 class="{{ away_team_picked }} {{ away_team_correct }} {{ away_team_incorrect }} option"
+                                 data-game-id="{{ game_id }}"
+                                 data-team="away-team">
+                                <img src="{{ url_for('static', filename='images/logos/' + away_team + '.png') }}" alt="Away team logo" />
+                            </div>
+                        </div>
+                        <div class="pick-divider"></div>
+                        <div class="home-div">
+                            <div id="home-team-{{ game_id }}"
+    
+                                 class="{{ home_team_picked }} {{ home_team_correct}} {{ home_team_incorrect }} option"
+                                 data-game-id="{{ game_id }}"
+                                 data-team="home-team">
+                                <img src="{{ url_for('static', filename='images/logos/' + home_team + '.png') }}" alt="Home team logo" />
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+    <script src="{{ url_for('static', filename='scripts/make_picks.js') }}"></script>
+{% endblock %}

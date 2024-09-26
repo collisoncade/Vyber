@@ -1,0 +1,366 @@
+/* * {
+    outline: 1px solid red;
+} */
+
+:root {
+    --prim-col: #00ffff;
+    --dull-col: #009aa2;
+    --sec-col: #202020;
+    --base-col: #181818;
+    --alt-col: white;
+    --gold-col: #eec05e;
+    --font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-family: var(--font);
+    color: var(--alt-col);
+    background-color: var(--sec-col);
+}
+
+.header {
+    background: var(--base-col);
+    border-bottom: 1px solid var(--prim-col);
+    display: flex;
+    padding: 10px;
+    margin: 0;
+}
+
+.header .left {
+    display: flex;
+    align-items: center;
+    width: 25%;
+}
+
+.left img {
+    display: flex;
+}
+
+.logo {
+    padding-left: 17px;
+    font-size: 28px;
+    font-weight: 900;
+    font-family: var(--font);
+    display: flex;
+    align-items: start;
+    color: var(--prim-col);
+    font-size: 32px;
+    font-weight: 900;
+    width: max-content;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu img {
+    outline: 5px solid var(--base-col);
+    width: 30px;
+    background-color: var(--prim-col);
+    border-radius: 10%;
+}
+
+.menu img:hover {
+    outline: 2px double var(--alt-col);
+    animation: rotate 0.3s ease-in-out;
+    box-shadow: 0 0 40px var(--prim-col);
+    transform-origin: center;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(180deg); }
+}
+
+.menu-container button:hover {
+    cursor: pointer;
+    background-color: var(--base-col);
+    box-shadow: 0 0 60px var(--prim-col);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    list-style: none;
+    background: var(--prim-col);
+    margin: auto;
+    padding: 6px 20px;
+    font-weight: 600;
+}
+
+.dropdown-menu li a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: var(--base-col);
+}
+
+.logout:hover {
+    cursor: pointer;
+}
+
+@keyframes expand {
+    0% {transform: scaleY(0);}
+    100% {transform: scaleY(1);}
+}
+
+.header .mid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+}
+
+.header-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+}
+
+.header .mid a {
+    margin-right: 20px;
+    padding: 10px;
+    text-decoration: none;
+    color: var(--alt-col);
+}
+
+@media (max-width: 600px) {.header .mid a {display: none;}}
+
+.header .right {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 16px;
+    width: 25%;
+}
+
+.header .right div {
+    color: var(--alt-col);
+    font-size: xx-large;
+    font-weight: 600;
+    margin: 0px 15px;
+}
+
+.header .right div:hover {
+    cursor: pointer;
+}
+
+.profile {
+    background: var(--prim-col);
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    margin-right: 0px;
+}
+
+.menu-dropdown-container {
+    position: relative;
+    margin: 0;
+}
+
+.visible {
+    display: flex;
+    animation: expand 150ms ease-in-out;
+    transform-origin: top;
+}
+
+.main {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 130px;
+}
+
+.content-subheader-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 65px;
+    background: var(--prim-col);
+}
+
+.content-subheader-1 div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    height: 35px;
+}
+
+.make-picks {
+    height: 55px;
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--base-col);
+}
+
+.user-season-stats, .user-week-stats {
+    border: 3px solid var(--base-col);
+    border-radius: 15px;
+    margin: 0px 25px;
+    background-color: var(--sec-col);
+    color: var(--prim-col);
+}
+
+.record-container {
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+}
+
+.record-container div {
+    align-items: center;
+    justify-content: center;
+}
+
+.week-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    height: 10px;
+    background: var(--dull-col);
+    color: var(--alt-col);
+    font-size: 20px;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    align-items: start;
+    padding: 0;
+}
+
+.schedule-container {
+    width: 300px;
+    height: 1500px;
+    padding: 0;
+    padding-top: 50px;
+}
+
+.user-data-container {
+    flex-wrap: nowrap;
+    height: 1500px;
+}
+
+.user-container {
+    height: 50px;
+    padding: 0;
+    /* max-width: 1500px;
+    min-width: 1500px; */
+}
+
+.user-data, .teams, .game-container,
+.weekly-user-record, .user-container {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+.user-picks-container {
+    display: inline-block;
+    height: 1450px;
+    width: 150px;
+    padding: 0;
+    margin: 0;
+}
+
+.user-info-container {
+    display: flex;
+    height: 50px;
+    width: 150px;
+    padding: 0;
+    margin: 0;
+}
+
+.game-info-container, .game-info-container div, .teams div {
+    padding: 0;
+}
+
+.user-picks {
+    display: block;
+    height: 50px;
+    width: 150px;
+}
+
+.user-info div {
+    display: inline-block;
+}
+
+.user-data {
+    display: block;
+    height: 1450px;
+}
+
+.correct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lime;
+    border-radius: 5%;
+    background-color: #0d4d00;
+    opacity: 1;
+}
+
+.correct:hover {
+    background-color: #126900;
+    box-shadow: 0 0 10px lime;
+}
+
+.incorrect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+    border-radius: 5%;
+    background-color: #4d0000;
+    opacity: 1;
+}
+
+.incorrect:hover {
+    background-color: #7a0000;
+    box-shadow: 0 0 10px red;
+}
+
+.schedule-container img, .weekly-result-container img, .pick, .no-pick {
+    height: 50px;
+    width: auto;
+}
+
+.no-pick {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+}
+
+.result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 100%;
+}
+
+@keyframes expand {
+    0% {transform: scaleY(0);}
+    100% {transform: scaleY(1);}
+}

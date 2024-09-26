@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Vyber</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="header">
+        <div class="left">
+            <div class="menu-container">
+                <div class="menu">
+                    <img class="menu-bars" src="{{ url_for('static', filename='images/menu-bars.png') }}" alt="menu-bars">
+                </div>
+            </div>
+            <div class="logo">Vyber</div>
+        </div>
+        <div class="mid"></div>
+        <div class="right">
+            <div class="create-account" onclick="navigateToCreateAccountPage()">Create Account</div>
+            <div class="or"
+                style="color: var(--alt-col); font-weight: 900;">
+                |</div>
+            <div class="login" onclick="navigateToLoginPage()">Login</div>
+        <div class="profile"></div>
+        </div>
+    </div>
+    <div class="dropdown-container">
+        <ul class="dropdown-menu">
+            <li><a href="#">Make Picks</a></li>
+            <li><a href="#">View Schedule</a></li>
+            <li><a href="#">League</a></li>
+            <li><a href="#">Profile</a></li>
+        </ul>
+    </div>
+    <div class="message">
+        <div class="phrase">The Choice Is Yours</div>
+        <div class="prompt">Create an account or login to make you sports predictions now!</div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
+{% endblock %}

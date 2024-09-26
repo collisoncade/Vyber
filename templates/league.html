@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Vyber - League</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/league.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="header">
+        <div class="left">
+            <div class="menu-container">
+                <div class="menu">
+                    <img class="menu-bars" src="{{ url_for('static', filename='images/menu-bars.png') }}" alt="menu-bars">
+                </div>
+            </div>
+            <div class="logo">Vyber</div>
+        </div>
+        <div class="mid">
+            <a href="/make-picks">Make Picks</a>
+            <a href="/league">League</a>
+            <a href="/schedule">Schedule</a>
+            <a href="/profile">Profile</a>
+        </div>
+        <div class="right">
+            <div class="username">{{ data['username'] }}</div>
+            <div class="profile"></div>
+        </div>
+    </div>
+    <div class="menu-dropdown-container">
+        <ul class="dropdown-menu">
+            <li><a href="/make-picks">Make Picks</a></li>
+            <li><a href="/league">League</a></li>
+            <li><a href="/schedule">Schedule</a></li>
+            <li><a href="/profile">Profile</a></li>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="content-header">
+            <div class="content-subheader-1">
+                <div class="league">League</div>
+                <div class="user-week-stats">
+                    <div class="text-week">Week: </div>
+                    <div class="record-container">
+                        <div class="week-wins">{{ week_wins }}</div>
+                        <div class="-">-</div>
+                        <div class="week-losses">{{ week_losses }}</div>
+                    </div>
+                    <div class="rank">4th</div>
+                </div>
+                <div class="user-season-stats">
+                    <div class="text-season">Season: </div>
+                    <div class="record-container">
+                        <div class="season-wins">{{ season_wins }}</div>
+                        <div class="-">-</div>
+                        <div class="season-losses">{{ season_losses }}</div>
+                    </div>
+                    <div class="rank">1st</div>
+                </div>
+            </div>
+        </div>
+        <div class="week-display">Week {{ data['week'] }}</div>
+    </div>
+    <div class="content-container">
+        <div class="schedule-container">
+            {% for game in data['games'] %}
+                {% set day = game[1] %}
+                {% set month = game[3] %}
+                {% set month_day = game[4] %}
+                {% set hour = game[5] %}
+                {% set minute = game[6] %}
+                {% set away_team = game[7] %}
+                {% set home_team = game[8] %}
+
+                {% if hour == 0 %}
+                    {% set hour = 12 %}
+                    {% set am_pm = 'AM' %}
+                {% elif hour > 12 %}
+                    {% set hour = hour - 12 %}
+                    {% set am_pm = 'PM' %}
+                {% else %}
+                    {% set am_pm = 'AM' %}
+                {% endif %}
+
+                {% if minute < 10 %}
+                    {% set minute = '0' + minute|string %}
+                {% else %}
+                    {% set minute = minute|string %}
+                {% endif %}
+
+                <div class="game-container">
+                    <div class="game-info-container">
+                        <div class="game-date">{{ day }}, {{ month }}/{{ month_day }}</div>
+                        <div class="game-time">{{ hour }}:{{ minute }} {{ am_pm }}</div>
+                    </div>
+                    <div class="teams">
+                        <div>
+                            <img class="away-team" src="{{ url_for('static', filename='images/logos/' + away_team + '.png') }}" alt="Away team logo" />
+                        </div>
+                        <p>@</p>
+                        <div>
+                            <img class="home-team" src="{{ url_for('static', filename='images/logos/' + home_team + '.png') }}" alt="Home team logo" />
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="user-data-container">
+            <div class="user-container">
+                {% for week_result in data['week_results'] %}
+                    <div class="user-info-container">
+                        {% set user_id = week_result[1] %}
+                        {% set wins = week_result[4] %}
+                        {% set losses = week_result[5] %}
+                        {% set username = data['usernames'][user_id] %}
+                        <div class="weekly-result-container">
+                            <img src="{{ url_for('static', filename='images/logos/' + username + '.svg') }}" />
+                        </div>
+                        <div class="weekly-user-record">
+                            <div class="wins">{{ wins }}</div>
+                            <div class="dash">-</div>
+                            <div class="losses">{{ losses }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="user-data">
+                {% for week_result in data['week_results'] %}
+                    {% set user_id = week_result[1] %}
+                    {% set picks = data[user_id] %}
+                    <div class="user-picks-container">
+                        {% for pick in picks %}
+                            <div class="user-picks">
+                                {% if pick != "N/A" %}
+                                    <img class="pick" src="{{ url_for('static', filename='images/logos/' + pick + '.png') }}">
+                                {% else %}
+                                    <div class="no-pick">
+                                        Pick!
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+<script src="{{ url_for('static', filename='scripts/league.js') }}"></script>
+{% endblock %}

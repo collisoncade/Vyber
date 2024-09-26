@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Vyber - Create Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create_account.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="logo">Vyber</div>
+        <div class="pad">Create Account</div>
+        <form id="register-form" method="POST" action="/create-account" enctype="application/json">
+            <input type="text" id="email" name="email" placeholder="Email Address">
+            <div class="email-existence"></div>
+            <input type="text" id="username" name="username" placeholder="Username" autocomplete="#">
+            <div class="username-existence"></div>
+            <input type="password" id="password" name="password" placeholder="Password">
+            <input type="submit" id="create-account" value="Create Account">
+        </form>
+        <div class="or-container">
+            <div class="line"></div>
+            <div class="or">or</div>
+        </div>
+        <div class="login"><a onclick="navigateToLoginPage()">Login</a></div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts/create_account.js') }}" defer></script>
+{% endblock %}
