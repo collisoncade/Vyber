@@ -10,7 +10,7 @@ import hashlib
 import jwt
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '147'
+app.config['SECRET_KEY'] = '******' # Censored out for GitHub
 
 __DB_FILE = os.path.join(app.root_path, 'master.db')
 __JSON_FILE = os.path.join(app.static_folder, 'schedule_reference.json')
