@@ -1,5 +1,5 @@
 # Vyber
-# (https://correct-finer-zebra.ngrok-free.app/)
+# https://correct-finer-zebra.ngrok-free.app/
 
 User-based web application for hosting a competition about the NFL! 
 
