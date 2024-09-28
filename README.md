@@ -18,3 +18,5 @@
   <li>HTML, CSS, & Javascript</li>
   <li>SQL Centralized Databasing</li>
 </ul>
+
+<p>All passwords are encrypted.</p>
